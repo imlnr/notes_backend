@@ -1,65 +1,62 @@
-const express = require('express');
-const { auth } = require('../middleware/auth.middleware');
-const { NoteModel } = require('../model/note.model');
-const noteRouter = express.Router();
+const express=require("express")
+const {NoteModel}=require("../model/note.model")
+const {auth}=require("../middlewares/auth.middleware")
 
+const noteRouter=express.Router()
 
-
-
-noteRouter.post('/', auth, async (req, res) => {
-    // res.send({"msg":"Working"})
-    try {
-        const note = new NoteModel(req.body);
-        await note.save();
-        res.send({ "msg": "new note has been added..." })
-    } catch (error) {
-        res.send({ "msg": error })
+noteRouter.post("/",auth,async(req,res)=>{
+    try{
+        const note=new NoteModel(req.body)
+        await note.save()
+        res.send({"msg":"New note has been added"}) 
+    } catch(err){
+        res.send({"error":err})
     }
 })
 
-noteRouter.get('/', auth, async (req, res) => {
-    try {
-        const notes = await NoteModel.find({ userID: req.body.userID });
-        res.send({ notes })
-    } catch (error) {
-        res.send({ "error": error })
+//get the notes opd logged in user or a user can read his/her notes only
+noteRouter.get("/",auth,async(req,res)=>{
+    try{
+        //userid in notes===userid who is making the request
+        const notes=await NoteModel.find({userID:req.body.userID})
+        res.send({notes})
+    } catch(err){   
+        res.send({"error":err})
     }
 })
 
-noteRouter.patch('/:noteId', auth, async (req, res) => {
-    const { noteId } = req.params;
-    try {
-        const note = await NoteModel.findOne({ _id: noteId });
-        if (note.userID == req.body.userID) {
-            await NoteModel.findByIdAndUpdate({ _id: noteId }, req.body);
-            res.send({ "msg": `the note with id ${noteId} has been updated successfully....` })
+noteRouter.patch("/:noteID",auth,async(req,res)=>{
+    const {noteID}=req.params
+    try{
+        //userID presnt in note === userID in the req.body
+        const note=await NoteModel.findOne({_id:noteID})
+        if(note.userID==req.body.userID){
+            await NoteModel.findByIdAndUpdate({_id:noteID},req.body)
+            res.send({"msg":`The note with ID:${noteID} has been updated`})
+        } else {
+            res.send({"msg":"you are not authorised"})
         }
-        else {
-            res.send({ "msg": "You are not authorized" })
-        }
-    } catch (error) {
-        res.send({ "error": error })
+    } catch(err){
+        res.send({"error":err})
     }
 })
 
-noteRouter.delete('/:noteId', auth, async (req, res) => {
-    const { noteId } = req.params;
-    try {
-        const note = await NoteModel.findOne({ _id: noteId });
-        if (note.userID == req.body.userID) {
-            await NoteModel.findByIdAndDelete({ _id: noteId });
-            res.send({ "msg": `the note with id ${noteId} has been deleted successfully....` })
+noteRouter.delete("/:noteID",auth,async(req,res)=>{
+    const {noteID}=req.params
+    try{
+        //userID presnt in note === userID in the req.body
+        const note=await NoteModel.findOne({_id:noteID})
+        if(note.userID==req.body.userID){
+            await NoteModel.findByIdAndDelete({_id:noteID})
+            res.send({"msg":`The note with ID:${noteID} has been deleted`})
+        } else {
+            res.send({"msg":"you are not authorised"})
         }
-        else {
-            res.send({ "msg": "You are not authorized" })
-        }
-    } catch (error) {
-        res.send({ "error": error, "temp": "error is getting" })
+    } catch(err){
+        res.send({"error":err})
     }
 })
 
-
-
-module.exports = {
+module.exports={
     noteRouter
 }
