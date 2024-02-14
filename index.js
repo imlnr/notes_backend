@@ -15,6 +15,10 @@ app.use(express.json())
 app.use('/users', userRouter);
 app.use('/notes',noteRouter);
 
+app.get('/',(req,res)=>{
+    res.send({"msg":"this is the home page...."})
+})
+
 app.listen(process.env.PORT, async () => {
     try {
         await connection
