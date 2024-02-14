@@ -19,11 +19,11 @@ app.get('/',(req,res)=>{
     res.send({"msg":"this is the home page...."})
 })
 
-app.listen(process.env.PORT, async () => {
+app.listen(process.env.port, async () => {
     try {
         await connection
         console.log('Connected to db');
-        console.log(`your server is running at port ${process.env.PORT}`);
+        console.log(`your server is running at port ${process.env.port}`);
 
     } catch (error) {
         console.log(error);
