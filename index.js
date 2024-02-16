@@ -15,7 +15,10 @@ app.use("/notes",noteRouter)
 app.get('/',(req,res)=>{
     res.send({"msg":"This is the home page....."})
 })
-
+app.post('/',(req,res)=>{
+    const data = req.body;
+    res.send({"msg":data})
+})
 
 app.listen(process.env.port,async()=>{
     try{
