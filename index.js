@@ -21,7 +21,7 @@ app.listen(process.env.port,async()=>{
     try{
         await connection
         console.log("Connected to the DB")
-        console.log(`Server is running at port ${process.env.port}`)
+        console.log(`Server is running at port ${'http://localhost:4500/'}`)
     } catch(err){
         console.log(err)
     }
