@@ -24,7 +24,7 @@ const options = {
                 url:'https://localhost:4500/'
             },
             {
-                url:'https://example.com/'
+                url:'https://odd-jade-rhinoceros-sari.cyclic.app'
             }
         ]
     },
