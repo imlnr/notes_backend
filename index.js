@@ -5,6 +5,7 @@ const { noteRouter } = require("./routes/note.routes")
 const cors = require("cors")
 require("dotenv").config()
 const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const app = express()
 app.use(express.json())
@@ -18,12 +19,21 @@ const options = {
             title: 'User Management System',
             version: '1.0.0',
         },
+        servers:[
+            {
+                url:'http://localhost:8080/'
+            },
+            {
+                url:'https://example.com/'
+            }
+        ]
     },
     apis: ['./routes/*.js'],
 };
 
 const openapiSpecification = swaggerJsdoc(options);
 
+app.use("/apidocs",swaggerUi.serve,swaggerUi.setup(openapiSpecification))
 app.use("/users", userRouter)
 app.use("/notes", noteRouter)
 
