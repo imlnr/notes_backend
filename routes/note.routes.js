@@ -20,14 +20,27 @@ const noteRouter=express.Router();
  *         body:
  *           type: string
  *           description: This is notes body text
- *         userID:
- *           type: string
- *           description: This is userid of the author
- *         author:
- *           type: string    // Corrected indentation here
- *           description: this is the author itself
  */
 
+
+/**
+ * @swagger
+ *  notes:
+ *   post:
+ *     summary: Add a new note
+ *     description: Creates a new note.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/note'
+ *     responses:
+ *       200:
+ *         description: Successfully added a new note
+ *       500:
+ *         description: Internal server error
+ */
 noteRouter.post("/",auth,async(req,res)=>{
     try{
         const note=new NoteModel(req.body)
