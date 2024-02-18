@@ -27,7 +27,7 @@ const noteRouter = express.Router();
  * /notes:
  *   post:
  *     summary: Add a new note
- *     tags: [Users]
+ *     tags: [Notes]
  *     requestBody:
  *       required: true
  *       content:
@@ -59,7 +59,7 @@ noteRouter.post("/", auth, async (req, res) => {
  * /notes:
  *   get:
  *     summary: Get notes of the logged-in user
- *     tags: [Users]
+ *     tags: [Notes]
  *     responses:
  *       200:
  *         description: Successfully retrieved the notes
@@ -86,7 +86,7 @@ noteRouter.get("/", auth, async (req, res) => {
  * /notes/{noteID}:
  *   patch:
  *     summary: Update a note
- *     tags: [Users]
+ *     tags: [Notes]
  *     parameters:
  *       - in: path
  *         name: noteID
@@ -128,7 +128,7 @@ noteRouter.patch("/:noteID", auth, async (req, res) => {
  * /notes/{noteID}:
  *   delete:
  *     summary: Delete a note
- *     tags: [Users]
+ *     tags: [Notes]
  *     parameters:
  *       - in: path
  *         name: noteID
