@@ -21,10 +21,10 @@ const options = {
         },
         servers:[
             {
-                url:'https://localhost:4500'
+                url:'https://odd-jade-rhinoceros-sari.cyclic.app'
             },
             {
-                url:'https://odd-jade-rhinoceros-sari.cyclic.app'
+                url:'https://localhost:4500'
             }
         ]
     },
