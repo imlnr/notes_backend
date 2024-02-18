@@ -11,9 +11,6 @@ const noteRouter = express.Router();
  *     note:
  *       type: object
  *       properties:
- *         _id:
- *           type: string
- *           description: This is the id
  *         title:
  *           type: string
  *           description: This is the title

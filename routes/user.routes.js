@@ -12,9 +12,6 @@ const userRouter = express.Router();
  *     user:
  *       type: object
  *       properties:
- *         _id:
- *           type: string
- *           description: This is the id
  *         username:
  *           type: string
  *           description: This is the user name
