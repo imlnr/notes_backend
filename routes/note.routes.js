@@ -2,7 +2,31 @@ const express=require("express")
 const {NoteModel}=require("../model/note.model")
 const {auth}=require("../middlewares/auth.middleware")
 
-const noteRouter=express.Router()
+const noteRouter=express.Router();
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     note:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: This is the id
+ *         title:
+ *           type: string
+ *           description: This is the title
+ *         body:
+ *           type: string
+ *           description: This is notes body text
+ *         userID:
+ *           type: string
+ *           description: This is userid of the author
+ *         author:
+ *           type: string    // Corrected indentation here
+ *           description: this is the author itself
+ */
 
 noteRouter.post("/",auth,async(req,res)=>{
     try{
